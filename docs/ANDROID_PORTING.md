@@ -25,6 +25,7 @@ The upstream snapshot already contains:
 - `Polytoria/export_presets.cfg.template` with `Client Android` and `Client Android APK` presets.
 - Both Android presets currently enable `arm64-v8a`.
 - `Polytoria/scripts/mobile/MobileUI.cs` handles mobile startup, authentication/deep links, mobile navigation, and world joining.
+- `Polytoria/scenes/client/ui/touch_controls.tscn` and the `JoystickArea`, `CameraTurnArea`, and `JumpButton` scripts already implement touch movement, camera drag/zoom, and a jump control. The joystick emulates gamepad axes and sprint input.
 - Android native builds of `Luau.VM` and `Luau.Compiler` are present.
 
 These findings establish that Android support is already partially implemented. They do not prove that the current source exports, installs, authenticates, or runs a world successfully on a physical device.
@@ -37,6 +38,7 @@ These findings establish that Android support is already partially implemented. 
 - Verify the existing .NET/Godot build.
 - Add a reproducible GitHub Actions Android APK export.
 - Record build failures before changing gameplay code.
+- Inspect the existing touch-control scene and input routing before adding or replacing controls.
 
 ### Phase 1 — First installable APK
 - Export a debug APK for `arm64-v8a`.
@@ -50,8 +52,9 @@ These findings establish that Android support is already partially implemented. 
 - Verify joining and leaving a multiplayer world.
 
 ### Phase 3 — In-world touch controls
-- Audit existing input actions, player controller, camera controller, and mobile scenes first.
-- Implement or repair virtual movement controls and touch camera look only where missing.
+- Validate the existing joystick, camera drag/zoom area, and jump control on a physical device.
+- Audit input routing and the touch-control scene for missing actions or layout defects.
+- Modify existing controls only where testing identifies a concrete defect.
 - Preserve keyboard/controller input on desktop.
 
 ### Phase 4 — Device compatibility and performance
