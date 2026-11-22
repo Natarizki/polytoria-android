@@ -39,12 +39,12 @@ jobs:
 
       - name: Install Android SDK packages
         run: |
-          sdkmanager --install \\
-            "platform-tools" \\
-            "platforms;android-35" \\
-            "build-tools;35.0.1" \\
-            "cmdline-tools;latest" \\
-            "cmake;3.10.2.4988404" \\
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.1" \
+            "cmdline-tools;latest" \
+            "cmake;3.10.2.4988404" \
             "ndk;28.1.13356709"
           yes | sdkmanager --licenses
 
@@ -75,12 +75,12 @@ jobs:
           EOF
 
           mkdir -p "$RUNNER_TEMP/android-signing"
-          keytool -genkeypair -v \\
-            -keystore "$RUNNER_TEMP/android-signing/debug.keystore" \\
-            -storepass android \\
-            -alias androiddebugkey \\
-            -keypass android \\
-            -dname "CN=Android Debug,O=Android,C=US" \\
+          keytool -genkeypair -v \
+            -keystore "$RUNNER_TEMP/android-signing/debug.keystore" \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -dname "CN=Android Debug,O=Android,C=US" \
             -keyalg RSA -keysize 2048 -validity 10000
 
           cp Polytoria/export_presets.cfg.template Polytoria/export_presets.cfg
@@ -100,15 +100,15 @@ jobs:
           GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD: android
         run: |
           mkdir -p build
-          godot --headless --path Polytoria \\
-            --install-android-build-template \\
-            --export-debug "Client Android APK" \\
+          godot --headless --path Polytoria \
+            --install-android-build-template \
+            --export-debug "Client Android APK" \
             ../build/Polytoria-Android-arm64.apk
 
       - name: Verify APK
         run: |
           test -s build/Polytoria-Android-arm64.apk
-          "$ANDROID_HOME/build-tools/35.0.1/aapt" dump badging \\
+          "$ANDROID_HOME/build-tools/35.0.1/aapt" dump badging \
             build/Polytoria-Android-arm64.apk | head -n 8
 
       - name: Upload APK artifact
