@@ -1,40 +1,81 @@
-<img src="docs/header.svg" width="100%">
+# Polytoria Android Client
 
-# Polytoria
+An experimental Android client project for [Polytoria](https://polytoria.com/), built from the [Polytoria game source](https://github.com/Polytoria/polytoria-game) and adapted for Android.
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
-[![Godot Engine](https://img.shields.io/badge/Godot-4.7-blue?logo=godot-engine)](https://godotengine.org/)
-[![.NET](https://img.shields.io/badge/.NET-10-purple?logo=dotnet)](https://dotnet.microsoft.com/)
+> **Status: Work in progress.** This project is under active development. It is not an official Polytoria release, and working Android builds are not guaranteed yet.
 
-Polytoria is a 3D multiplayer gaming platform built on top of the [Godot Engine](https://godotengine.org/). It provides a set of tools for creating your multiplayer games, with server-client architecture, synchronized state replication and scripting powered by [Luau](https://luau.org/). Worlds can be published to [polytoria.com](http://polytoria.com/), which is accessible from Windows, macOS and Linux, with mobile in the works!
+## Project goals
 
-![15 Seconds by phoe](docs/creator.png)
+- Bring the Polytoria game client to Android devices.
+- Target **Android ARM64 (arm64-v8a)**.
+- Use Godot's Mobile renderer and optimize for mobile hardware.
+- Keep the client lightweight and responsive.
 
-*Photo credit: [15 Seconds by phoe](https://polytoria.com/places/12661)*
+## Technology
 
-## Getting the Software
+| Component | Version / target |
+|---|---|
+| Engine | Godot 4.7.0 .NET |
+| Runtime / SDK | .NET 10 |
+| Platform | Android |
+| Architecture | ARM64 (arm64-v8a) |
+| Renderer | Godot Mobile |
 
-You can head to [polytoria.com](https://polytoria.com/) to register your account. The download button will be available in the [worlds](https://polytoria.com/places) page.
+The project uses Godot C#/.NET. The standard non-.NET Godot editor is not suitable for building this project.
 
-To launch the creator software, head to [polytoria.com/create](https://polytoria.com/create/) and click "Launch Creator".
+## Development requirements
 
-## Contributing
+To build the Android project locally, install:
 
-Contributing guides are currently a work in progress.
+- **Godot 4.7.0 .NET** for Windows or Linux.
+- **Godot 4.7.0 .NET export templates**.
+- **.NET 10 SDK**.
+- **Java JDK 17**.
+- **Android SDK**, including Android Platform 35 and Build-Tools 35.0.1.
+- **Android NDK 28.1.13356709**.
+- **CMake 3.10.2.4988404**.
+- **Git**, including Git LFS if required by repository assets.
 
-Meanwhile, you can join the [Polytoria Contributors](https://discord.gg/HUgEE9FhSU) Discord server if you have any questions!
+Configure the Android SDK and Java paths in Godot Editor Settings before exporting.
+
+## Getting the source
+
+Clone this repository and its submodules:
+
+```bash
+git clone --recurse-submodules https://github.com/Natarizki/polytoria-android.git
+cd polytoria-android
+```
+
+Open the Godot project in the `Polytoria/` directory using the **Godot .NET 4.7.0** editor.
+
+## Building
+
+1. Install the development requirements listed above.
+2. Open `Polytoria/` in Godot .NET.
+3. Allow the project to import its assets.
+4. Restore and build the C# solution.
+5. Configure the Android export preset named `Client Android APK`.
+6. Export a debug APK for Android ARM64.
+
+Build automation is maintained in [GitHub Actions](https://github.com/Natarizki/polytoria-android/actions). The workflow and its artifacts are experimental; a successful upload alone does not guarantee that the exported APK is fully functional.
+
+## Project structure
+
+- `Polytoria/` — Godot game project and C# source.
+- `.github/workflows/` — automated build workflows.
+- `docs/` — project documentation and assets.
+
+## Upstream project
+
+This project is based on [Polytoria/polytoria-game](https://github.com/Polytoria/polytoria-game). Please refer to the upstream project for information about the Polytoria platform.
 
 ## License
 
 Unless otherwise noted:
-- Source code is licensed under Mozilla Public License Version 2.0. Please check [LICENSE](/LICENSE) for more info.
-- Brand assets, logos, names, and trademarks are not licensed for reuse.
-- Third-party assets and native binaries are governed by their own licenses. Please refer to the respective repositories and documentation for more information.
 
-## Contributors
+- Source code is licensed under the Mozilla Public License 2.0. See [LICENSE](LICENSE).
+- Polytoria brand assets, logos, names, and trademarks are not licensed for reuse by this project.
+- Third-party assets and native binaries remain subject to their respective licenses.
 
-<a href="https://github.com/Polytoria/polytoria-game/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Polytoria/polytoria-game" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
+This repository is an independent development effort and is not an official Polytoria product.
