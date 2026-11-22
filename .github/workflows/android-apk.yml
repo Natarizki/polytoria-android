@@ -103,8 +103,9 @@ jobs:
         run: |
           mkdir -p build
           godot --headless --path Polytoria \
+            --install-android-build-template \
             --export-debug "Client Android APK" \
-            build/Polytoria-Android-arm64.apk
+            ../build/Polytoria-Android-arm64.apk
 
       - name: Verify APK
         run: |
